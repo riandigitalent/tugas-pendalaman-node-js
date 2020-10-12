@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express'
 import hbs from 'hbs'
 import path from 'path'
@@ -87,6 +90,6 @@ app.use((err, req, res, next) => {
     res.send(err.message)
 })
 
-app.listen(9999, () => {
-    console.log('app jalan di port 9999')
+app.listen(process.env.PORT, () => {
+    console.log(`App listen on port ${process.env.PORT}`)
 })
