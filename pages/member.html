@@ -17,9 +17,9 @@
                     <h5 class="card-title">Add Product</h5>
                     <form method="POST" action="/add-member">
                         <div class="form-group">
-                            <label for="mamberName">Nama anggota</label>
-                            <input type="text" class="form-control" id="mamberName" aria-describedby="mamberHelp" name="name">
-                            <small id="mamberHelp" class="form-text text-muted">Input Nama Anggota.</small>
+                            <label for="memberName">Nama anggota</label>
+                            <input type="text" class="form-control" id="memberName" aria-describedby="memberHelp" name="name">
+                            <small id="memberHelp" class="form-text text-muted">Input Nama Anggota.</small>
                         </div>
                         <div class="form-group">
                             <label for="memberAge">Umur</label>
@@ -42,15 +42,17 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each members}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mang ade</td>
-                    <td>33</td>
-                    <td>-</td>
+                    <th scope="row">{{ id }}</th>
+                    <td>{{ name }}</td>
+                    <td>{{ age }}</td>
+                    <td>{{ photo }}</td>
                     <td>
                         <a href="#" type="button" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>

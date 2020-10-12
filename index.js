@@ -5,7 +5,8 @@ import morgan from 'morgan'
 import bodyPraser from 'body-parser' // inport bodyparser biar bisa post
 
 // impor database ke index
-import { InitDatabase, initTable, insertmember } from './database.js'
+import { InitDatabase, initTable, insertmember, getmember } from './database.js'
+import {get } from 'http'
 
 const __dirname = path.resolve()
 
@@ -31,8 +32,15 @@ app.get('/', (req, res, next) => {
 })
 
 // ambil halaman anggota
-app.get('/member', (req, res, next) => {
-    res.render('member')
+app.get('/member', async(req, res, next) => {
+    let members
+    try {
+        members = await getmember(dbmember)
+    } catch (error) {
+        return next(error)
+
+    }
+    res.render('member', { members })
 })
 
 //code buat handle  Get Method

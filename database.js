@@ -41,13 +41,16 @@ export function insertmember(db, name, age, photo) {
         console.log('add member success')
     })
 }
-export function getember(db) {
-    db.all('SELECT * FROM member', (err, result) => {
-        if (err) {
-            console.log(err)
-            throw err
-        }
-        console.log(result)
-        return result
+export function getmember(db) {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM member', (err, result) => {
+            if (err) {
+                reject(err)
+            }
+
+            console.log('Query result', result)
+            resolve(result)
+        })
     })
+
 }
