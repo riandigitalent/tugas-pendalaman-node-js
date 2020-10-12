@@ -4,9 +4,14 @@ import path from 'path'
 import morgan from 'morgan'
 import bodyPraser from 'body-parser' // inport bodyparser biar bisa post
 
+// impor database ke index
+import { InitDatabase, initTable, insertmember } from './database.js'
+
 const __dirname = path.resolve()
 
 const app = express()
+const dbmember = InitDatabase()
+initTable(dbmember)
 
 app.set('views', __dirname + '/pages/')
 app.set('view engine', 'html')
@@ -38,7 +43,15 @@ app.get('/add-member', (req, res, next) => {
 //code buat handle  post Method
 app.post('/add-member', (req, res, next) => {
     console.log('Request', req.body)
-    res.send(req.body)
+        //res.send(req.body)
+
+    //pangil function add member
+    insertmember(dbmember, req.body.name, parseInt(req.body.age), '-')
+
+    // redirect atau refressh halaman abis di tambahin
+    res.redirect('/member')
+
+
 })
 
 app.use((err, req, res, next) => {
